@@ -15,11 +15,12 @@ public class CadastraUsuarioServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
-	CadastraUsuarioService service;
+	private CadastraUsuarioService service;
 	
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		request.setCharacterEncoding("UTF-8");
 		Pessoa pessoa = new Pessoa();
 		
 		pessoa.setNome(request.getParameter("nome"));
@@ -34,11 +35,7 @@ public class CadastraUsuarioServlet extends HttpServlet {
 		try {
 			this.service.adiciona(pessoa);
 			
-			out.println("<html>");
-			out.println("<body>");
-			out.println("Contato " + pessoa.getNome() + " cadastrado com sucesso!");
-			out.println("</body>");
-			out.println("</html>");
+			response.sendRedirect("busca-contatos");
 			
 		} catch (Exception e) {
 			out.println("<html>");
