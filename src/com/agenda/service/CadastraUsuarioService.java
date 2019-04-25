@@ -21,4 +21,8 @@ public class CadastraUsuarioService {
 		return this.dao.buscaPessoas();
 	}
 	
+	public void remove(Pessoa pessoa) {
+		this.dao.remove(pessoa);
+	}
+	
 }

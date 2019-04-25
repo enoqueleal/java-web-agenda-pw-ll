@@ -2,6 +2,7 @@ package com.agenda.model;
 
 public class Pessoa {
 
+	private long id;
 	private String nome;
 	private String email;
 	private String telefone;
@@ -37,6 +38,14 @@ public class Pessoa {
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 }

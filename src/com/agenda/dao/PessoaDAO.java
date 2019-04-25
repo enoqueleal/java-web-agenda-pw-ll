@@ -15,11 +15,11 @@ public class PessoaDAO {
 	private Connection connection;
 
 	public void adiciona(Pessoa pessoa) {
-		
+
 		String SQL = "insert into pessoas (nome, email, endereco, telefone) values (?,?,?,?)";
 
 		try {
-			
+
 			this.connection = new ConnectionFactory().getConnection();
 			PreparedStatement stmt = this.connection.prepareStatement(SQL);
 
@@ -30,45 +30,59 @@ public class PessoaDAO {
 
 			stmt.execute();
 			stmt.close();
-			
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-		
+
 	}
-	
+
 	public List<Pessoa> buscaPessoas() {
-		
+
 		String SQL = "select * from pessoas";
-		
+
 		try {
-			
+
 			this.connection = new ConnectionFactory().getConnection();
-		    PreparedStatement stmt = this.connection.prepareStatement(SQL);
+			PreparedStatement stmt = this.connection.prepareStatement(SQL);
 
-		    List<Pessoa> pessoas = new ArrayList<Pessoa>();
-		    
-		    ResultSet rs = stmt.executeQuery();
+			List<Pessoa> pessoas = new ArrayList<Pessoa>();
 
-		    while (rs.next()) {
-		    	Pessoa pessoa = new Pessoa();
-		    	pessoa.setNome(rs.getString("nome"));
-		    	pessoa.setEmail(rs.getString("email"));
-		    	pessoa.setEndereco(rs.getString("endereco"));
-		    	pessoa.setTelefone(rs.getString("telefone"));
-		    	pessoas.add(pessoa);
-		    }
+			ResultSet rs = stmt.executeQuery();
 
-		    stmt.close();
-		    this.connection.close();
-		    return pessoas;
-		    
+			while (rs.next()) {
+				Pessoa pessoa = new Pessoa();
+				pessoa.setId(rs.getLong("id"));
+				pessoa.setNome(rs.getString("nome"));
+				pessoa.setEmail(rs.getString("email"));
+				pessoa.setEndereco(rs.getString("endereco"));
+				pessoa.setTelefone(rs.getString("telefone"));
+				pessoas.add(pessoa);
+			}
+
+			stmt.close();
+			this.connection.close();
+			return pessoas;
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-	
+
 	}
-	
-	
-	
+
+	public void remove(Pessoa pessoa) {
+
+		String SQL = "delete from pessoas where id=?";
+
+		try {
+			this.connection = new ConnectionFactory().getConnection();
+			PreparedStatement stmt = connection.prepareStatement(SQL);
+			stmt.setLong(1, pessoa.getId());
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 }
