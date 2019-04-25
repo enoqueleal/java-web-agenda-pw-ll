@@ -19,24 +19,17 @@ public class ListaUsuariosServlet extends HttpServlet {
 
 	private CadastraUsuarioService service;
 
-	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-		this.service = new CadastraUsuarioService();
-		List<Pessoa> contatos = this.service.buscaPessoas();
-
-		request.setAttribute("contatos", contatos);
-
-		return "lista-contatos.jsp";
-	}
-
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		try {
-			request.getRequestDispatcher(execute(request, response)).forward(request, response);
+			this.service = new CadastraUsuarioService();
+			List<Pessoa> contatos = this.service.buscaPessoas();
+			request.setAttribute("contatos", contatos);
+			request.getRequestDispatcher("lista-contatos.jsp").forward(request, response);
 		} catch (Exception e) {
 			throw new ServletException("A lógica de negócios causou uma exceção", e);
 		}
 	}
-	
+
 }
