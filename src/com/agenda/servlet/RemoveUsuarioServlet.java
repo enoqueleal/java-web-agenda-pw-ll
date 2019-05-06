@@ -26,7 +26,7 @@ public class RemoveUsuarioServlet extends HttpServlet {
 			Pessoa pessoa = new Pessoa();
 			pessoa.setId(id);
             this.service = new CadastraUsuarioService();
-        	this.service.remove(pessoa);
+        	this.service.remover(pessoa);
 			response.sendRedirect("busca-contatos");
 		} catch (Exception e) {
 			throw new ServletException("A lógica de negócios causou uma exceção", e);

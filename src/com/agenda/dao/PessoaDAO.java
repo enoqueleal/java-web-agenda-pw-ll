@@ -14,7 +14,7 @@ public class PessoaDAO {
 
 	private Connection connection;
 
-	public void adiciona(Pessoa pessoa) {
+	public void cadastrar(Pessoa pessoa) {
 
 		String SQL = "insert into pessoas (nome, email, endereco, telefone) values (?,?,?,?)";
 
@@ -37,7 +37,7 @@ public class PessoaDAO {
 
 	}
 
-	public List<Pessoa> buscaPessoas() {
+	public List<Pessoa> buscarPessoas() {
 
 		String SQL = "select * from pessoas";
 
@@ -70,7 +70,7 @@ public class PessoaDAO {
 
 	}
 
-	public void remove(Pessoa pessoa) {
+	public void remover(Pessoa pessoa) {
 
 		String SQL = "delete from pessoas where id=?";
 
@@ -83,6 +83,28 @@ public class PessoaDAO {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+	}
+	
+	public void alterar(Pessoa pessoa) {
+		
+	    String SQL = "update pessoas set nome=?, email=?, endereco=?, telefone=? where id=?";
+	    
+	    try {
+	    	
+	    	this.connection = new ConnectionFactory().getConnection();
+	        PreparedStatement stmt = this.connection.prepareStatement(SQL);
+	        
+	        stmt.setString(1, pessoa.getNome());
+	        stmt.setString(2, pessoa.getEmail());
+	        stmt.setString(3, pessoa.getEndereco());
+	        stmt.setString(4, pessoa.getTelefone());
+	        stmt.setLong(5, pessoa.getId());
+	        stmt.execute();
+	        stmt.close();
+	        
+	    } catch (SQLException e) {
+	        throw new RuntimeException(e);
+	    }
 	}
 
 }

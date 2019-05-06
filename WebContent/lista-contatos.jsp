@@ -31,7 +31,7 @@
 		<c:if test="${empty contatos}">
 			<div class="text-center">
 				<hr>
-				<h3 class="display-4">Nenhum contato cadastrado!</h3>
+				<h2>Nenhum contato cadastrado!</h2>
 			</div>
 		</c:if>
 		
@@ -51,7 +51,11 @@
 							<td>${pessoa.email}</td>
 							<td>${pessoa.endereco}</td>
 							<td>${pessoa.telefone}</td>
-							<td><a href="remove-usuario?id=${pessoa.id}">Remover</a></td>
+							<td>
+								<a href="remove-usuario?id=${pessoa.id}">Remover</a>
+								<span> | </span>
+								<a href="adiciona-contato.jsp?id=${pessoa.id}&nome=${pessoa.nome}&email=${pessoa.email}&endereco=${pessoa.endereco}&telefone=${pessoa.telefone}">Editar</a>
+							</td>
 						</tr>
 					</c:forEach>
 			</table>

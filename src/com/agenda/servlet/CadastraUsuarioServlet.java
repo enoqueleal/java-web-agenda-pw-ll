@@ -23,6 +23,9 @@ public class CadastraUsuarioServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		Pessoa pessoa = new Pessoa();
 		
+		if(null != request.getParameter("id")) {
+			pessoa.setId(Long.parseLong(request.getParameter("id")));
+		}
 		pessoa.setNome(request.getParameter("nome"));
 		pessoa.setEmail(request.getParameter("email"));
 		pessoa.setEndereco(request.getParameter("endereco"));
@@ -33,7 +36,8 @@ public class CadastraUsuarioServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		try {
-			this.service.adiciona(pessoa);
+			
+			this.service.salvarOuAtualizar(pessoa);
 			
 			response.sendRedirect("busca-contatos");
 			
