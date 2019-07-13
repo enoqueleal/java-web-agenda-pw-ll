@@ -23,7 +23,7 @@ public class CadastraUsuarioServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		Pessoa pessoa = new Pessoa();
 		
-		if(null != request.getParameter("id")) {
+		if(null != request.getParameter("id") && !"".equals(request.getParameter("id"))) {
 			pessoa.setId(Long.parseLong(request.getParameter("id")));
 		}
 		pessoa.setNome(request.getParameter("nome"));
