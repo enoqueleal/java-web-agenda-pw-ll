@@ -21,29 +21,31 @@
 		</c:if>
 		
 		<c:if test="${not empty contatos}">
-			<table class="table">
-					<tr>
-						<th>Nome</th>
-						<th>E-mail</th>
-						<th>Endereco</th>
-						<th>Telefone</th>
-						<th></th>
-					</tr>
-					
-					<c:forEach var="pessoa" items="${contatos}">
+			<div class="table-responsive">
+				<table class="table">
 						<tr>
-							<td>${pessoa.nome}</td>
-							<td>${pessoa.email}</td>
-							<td>${pessoa.endereco}</td>
-							<td>${pessoa.telefone}</td>
-							<td>
-								<a href="#" onclick="saveContactId(${pessoa.id})" data-toggle="modal" data-target="#modalExemplo">Remover</a>
-								<span> | </span>
-								<a href="adiciona-contato.jsp?id=${pessoa.id}&nome=${pessoa.nome}&email=${pessoa.email}&endereco=${pessoa.endereco}&telefone=${pessoa.telefone}">Editar</a>
-							</td>
+							<th>Nome</th>
+							<th>E-mail</th>
+							<th>Endereco</th>
+							<th>Telefone</th>
+							<th></th>
 						</tr>
-					</c:forEach>
-			</table>
+						
+						<c:forEach var="pessoa" items="${contatos}">
+							<tr>
+								<td>${pessoa.nome}</td>
+								<td>${pessoa.email}</td>
+								<td>${pessoa.endereco}</td>
+								<td>${pessoa.telefone}</td>
+								<td>
+									<a href="#" onclick="saveContactId(${pessoa.id})" data-toggle="modal" data-target="#modalExemplo">Remover</a>
+									<span> | </span>
+									<a href="adiciona-contato.jsp?id=${pessoa.id}&nome=${pessoa.nome}&email=${pessoa.email}&endereco=${pessoa.endereco}&telefone=${pessoa.telefone}">Editar</a>
+								</td>
+							</tr>
+						</c:forEach>
+				</table>
+			</div>
 		</c:if>
 		
 	<div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
